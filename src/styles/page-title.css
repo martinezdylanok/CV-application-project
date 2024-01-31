@@ -1,0 +1,7 @@
+.page-title {
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   font-size: 4.5em;
+   color: red;
+}
