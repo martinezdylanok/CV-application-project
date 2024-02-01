@@ -1,0 +1,68 @@
+.general-info-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.general-info-title {
+   color: rgb(24, 38, 71, .9);
+}
+
+.general-info-form {
+   display: grid;
+   grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+   gap: 1.742rem;
+}
+
+.general-info-form input {
+   font-size: 1.3em;
+   font-weight: 600;
+   border: none;
+}
+
+.general-info-form input::placeholder {
+   color: rgba(149, 149, 149, 0.9);
+   font-weight: 600;
+   transition: color .20s ease-in-out;
+}
+
+.general-info-form input:focus {
+   outline: none;
+}
+
+.general-info-form input:focus::placeholder {
+   color: rgb(109, 108, 108);
+}
+
+.general-info-form button {
+   justify-self: flex-start;
+}
+
+.general-info-form button,
+.displayed-info-container button {
+   font-size: 1.3em;
+   font-weight: 600;
+   color: rgba(149, 149, 149, 0.9);
+   cursor: not-allowed;
+   background-color: white;
+   outline: none;
+   border: none;
+   border-radius: 0;
+   padding: .5rem 0 .5rem 0;
+   transition: color .20s ease-in-out;
+}
+
+.displayed-info-container button {
+   cursor: pointer;
+}
+
+.general-info-form button:hover,
+.displayed-info-container button:hover {
+   color: rgb(109, 108, 108);
+}
+
+.displayed-info-container {
+   display: flex;
+   justify-content: space-between;
+   width: 32.867rem;
+}
