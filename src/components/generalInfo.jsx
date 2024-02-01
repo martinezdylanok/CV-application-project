@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import "../styles/general-info.css";
 
 export default function GeneralInfo() {
    const [firstName, setFirstName] = useState("");
@@ -18,44 +19,38 @@ export default function GeneralInfo() {
    }
 
    return (
-      <>
-         <h1>General Information</h1>
+      <div className="general-info-container">
+         <h1 className="general-info-title">General Information</h1>
          {!formSubmitted && (
-            <form onSubmit={handleSubmit}>
+            <form className="general-info-form" onSubmit={handleSubmit}>
                <div className="name">
-                  <h1>Name</h1>
-                  <label htmlFor="name" />
-                  <input type="text" className="name" id="name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <input type="text" className="name" id="name" placeholder="NAME" maxLength={35} minLength={1} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                </div>
                <div className="surname">
-                  <h1>Surname</h1>
-                  <label htmlFor="surname" />
-                  <input type="text" className="surname" id="surname" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <input type="text" className="surname" id="surname" placeholder="SURNAME" maxLength={35} minLength={1} value={lastName} onChange={(e) => setLastName(e.target.value)} />
                </div>
                <div className="email">
-                  <h1>Email</h1>
-                  <label htmlFor="email" />
-                  <input type="text" className="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <input type="email" className="email" id="email" placeholder="EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} />
                </div>
                <div className="phone-number">
-                  <h1>Phone Number</h1>
-                  <label htmlFor="phone-number" />
-                  <input type="text" className="phone-number" id="phone-number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                  <input type="tel" className="phone-number" id="phone-number" placeholder="PHONE NUMBER" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                </div>
-               <button type="submit">Submit</button>
+               <button type="submit">SUBMIT</button>
             </form>
          )}
 
          {formSubmitted && (
-            <form className="displayed-info" onSubmit={handleEdit}>
-               <h2>
-                  {firstName} {lastName && ` ${lastName}`}
-               </h2>
-               <p>Email adress: {email}</p>
-               <p>Phone Number: {phoneNumber}</p>
-               <button type="submit">Edit</button>
+            <form className="displayed-info-container" onSubmit={handleEdit}>
+               <div className="displayed-info-data">
+                  <h2>
+                     {firstName} {lastName && ` ${lastName}`}
+                  </h2>
+                  <p>Email adress: {email}</p>
+                  <p>Phone Number: {phoneNumber}</p>
+               </div>
+               <button type="submit">EDIT</button>
             </form>
          )}
-      </>
+      </div>
    );
 }
