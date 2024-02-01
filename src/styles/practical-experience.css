@@ -1,0 +1,69 @@
+.practical-info-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.practical-info-title {
+   color: rgb(24, 38, 71, .9);
+}
+
+.practical-info-form {
+   display: grid;
+   grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+   gap: 1.742rem;
+}
+
+.practical-info-form input {
+   font-size: 1.3em;
+   font-weight: 600;
+   border: none;
+}
+
+.practical-info-form input::placeholder {
+   color: rgba(149, 149, 149, 0.9);
+   font-weight: 600;
+   transition: color .20s ease-in-out;
+}
+
+.practical-info-form input:focus {
+   outline: none;
+}
+
+.practical-info-form input:focus::placeholder {
+   color: rgb(109, 108, 108);
+}
+
+.practical-info-form button {
+   justify-self: flex-start;
+   grid-row-start: 3; 
+}
+
+.practical-info-form button,
+.displayed-info-container button {
+   font-size: 1.3em;
+   font-weight: 600;
+   color: rgba(149, 149, 149, 0.9);
+   cursor: not-allowed;
+   background-color: white;
+   outline: none;
+   border: none;
+   padding: 0;
+   border-radius: 0;
+   transition: color .20s ease-in-out;
+}
+
+.displayed-info-container button {
+   cursor: pointer;
+}
+
+.practical-info-form button:hover,
+.displayed-info-container button:hover {
+   color: rgb(109, 108, 108);
+}
+
+.displayed-info-container {
+   display: flex;
+   justify-content: space-between;
+   width: 32.867rem;
+}
