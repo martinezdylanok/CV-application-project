@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "../styles/general-info.css";
 
 export default function GeneralInfo() {
@@ -7,9 +7,18 @@ export default function GeneralInfo() {
    const [email, setEmail] = useState("");
    const [phoneNumber, setPhoneNumber] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
+   const [allFieldsCompleted, setAllFieldsCompleted] = useState(false);
+
+   useEffect(() => {
+      const isCompleted = firstName && lastName && email && phoneNumber;
+      setAllFieldsCompleted(isCompleted);
+   }, [firstName, lastName, email, phoneNumber]);
 
    function handleSubmit(e) {
       e.preventDefault();
+      if (!allFieldsCompleted) {
+         console.log("Please fill out all fields.");
+      }
       setFormSubmitted(true);
    }
 
@@ -24,18 +33,20 @@ export default function GeneralInfo() {
          {!formSubmitted && (
             <form className="general-info-form" onSubmit={handleSubmit}>
                <div className="name">
-                  <input type="text" className="name" id="name" placeholder="NAME" maxLength={35} minLength={1} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                  <input type="text" className="name" id="name" placeholder="NAME" maxLength={35} minLength={1} required value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                </div>
                <div className="surname">
-                  <input type="text" className="surname" id="surname" placeholder="SURNAME" maxLength={35} minLength={1} value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                  <input type="text" className="surname" id="surname" placeholder="SURNAME" maxLength={35} minLength={1} required value={lastName} onChange={(e) => setLastName(e.target.value)} />
                </div>
                <div className="email">
-                  <input type="email" className="email" id="email" placeholder="EMAIL" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  <input type="email" className="email" id="email" placeholder="EMAIL" required value={email} onChange={(e) => setEmail(e.target.value)} />
                </div>
                <div className="phone-number">
-                  <input type="tel" className="phone-number" id="phone-number" placeholder="PHONE NUMBER" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                  <input type="tel" className="phone-number" id="phone-number" placeholder="PHONE NUMBER" required value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                </div>
-               <button type="submit">SUBMIT</button>
+               <button type="submit" style={{ cursor: allFieldsCompleted ? "pointer" : "not-allowed" }}>
+                  SUBMIT
+               </button>
             </form>
          )}
 
