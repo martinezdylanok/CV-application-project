@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "../styles/educational-info.css";
 
 export default function EducationalInfo() {
@@ -6,9 +6,18 @@ export default function EducationalInfo() {
    const [titleOfStudy, setTitleOfStudy] = useState("");
    const [dateOfStudy, setDateOfStudy] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
+   const [allFieldsCompleted, setAllFieldsCompleted] = useState(false);
+
+   useEffect(() => {
+      const isCompleted = schoolName && titleOfStudy && dateOfStudy;
+      setAllFieldsCompleted(isCompleted);
+   }, [schoolName, titleOfStudy, dateOfStudy]);
 
    function handleSubmit(e) {
       e.preventDefault();
+      if (!allFieldsCompleted) {
+         console.log("Please fill out all fields.");
+      }
       setFormSubmitted(true);
    }
 
@@ -23,15 +32,17 @@ export default function EducationalInfo() {
          {!formSubmitted && (
             <form className="educational-info-form" onSubmit={handleSubmit}>
                <div className="school-name">
-                  <input type="text" className="school-name" id="school-name" placeholder="SCHOOL NAME" maxLength={35} value={schoolName} onChange={(e) => setSchoolName(e.target.value)} />
+                  <input type="text" className="school-name" id="school-name" placeholder="SCHOOL NAME" maxLength={35} required value={schoolName} onChange={(e) => setSchoolName(e.target.value)} />
                </div>
                <div className="title-of-study">
-                  <input type="text" className="title-of-study" id="title-of-study" placeholder="TITLE OF STUDY" maxLength={35} value={titleOfStudy} onChange={(e) => setTitleOfStudy(e.target.value)} />
+                  <input type="text" className="title-of-study" id="title-of-study" placeholder="TITLE OF STUDY" maxLength={35} required value={titleOfStudy} onChange={(e) => setTitleOfStudy(e.target.value)} />
                </div>
                <div className="date-of-study">
-                  <input type="date" className="date-of-study" id="date-of-study" placeholder="DATE" value={dateOfStudy} onChange={(e) => setDateOfStudy(e.target.value)} />
+                  <input type="date" className="date-of-study" id="date-of-study" placeholder="DATE" required value={dateOfStudy} onChange={(e) => setDateOfStudy(e.target.value)} />
                </div>
-               <button type="submit">SUBMIT</button>
+               <button type="submit" style={{ cursor: allFieldsCompleted ? "pointer" : "not-allowed" }}>
+                  SUBMIT
+               </button>
             </form>
          )}
 
