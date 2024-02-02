@@ -48,7 +48,7 @@
    background-color: white;
    outline: none;
    border: none;
-   padding: 0;
+   padding: .5rem 0 .5rem 0;
    border-radius: 0;
    transition: color .20s ease-in-out;
 }
