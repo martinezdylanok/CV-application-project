@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import "../styles/practical-experience.css";
 
 export default function PracticalExperience() {
@@ -7,9 +7,18 @@ export default function PracticalExperience() {
    const [mainResponsabilities, setMainResponsabilities] = useState("");
    const [dateOfWorking, setDateOfWorking] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
+   const [allFieldsCompleted, setAllFieldsCompleted] = useState(false);
+
+   useEffect(() => {
+      const isCompleted = companyName && positionTitle && mainResponsabilities && dateOfWorking;
+      setAllFieldsCompleted(isCompleted);
+   }, [companyName, positionTitle, mainResponsabilities, dateOfWorking]);
 
    function handleSubmit(e) {
       e.preventDefault();
+      if (!allFieldsCompleted) {
+         console.log("Please fill out all fields.");
+      }
       setFormSubmitted(true);
    }
 
@@ -24,18 +33,20 @@ export default function PracticalExperience() {
          {!formSubmitted && (
             <form className="practical-info-form" onSubmit={handleSubmit}>
                <div className="company-name">
-                  <input type="text" className="company-name" id="company-name" placeholder="COMPANY NAME" maxLength={35} value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                  <input type="text" className="company-name" id="company-name" placeholder="COMPANY NAME" maxLength={35} required value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                </div>
                <div className="position-title">
-                  <input type="text" className="position-title" id="position-title" placeholder="POSITION" maxLength={35} value={positionTitle} onChange={(e) => setPositionTitle(e.target.value)} />
+                  <input type="text" className="position-title" id="position-title" placeholder="POSITION" maxLength={35} required value={positionTitle} onChange={(e) => setPositionTitle(e.target.value)} />
                </div>
                <div className="main-responsabilities">
-                  <input type="text" className="main-responsabilities" id="main-responsabilities" placeholder="RESPONSABILITIES" maxLength={35} value={mainResponsabilities} onChange={(e) => setMainResponsabilities(e.target.value)} />
+                  <input type="text" className="main-responsabilities" id="main-responsabilities" placeholder="RESPONSABILITIES" maxLength={35} required value={mainResponsabilities} onChange={(e) => setMainResponsabilities(e.target.value)} />
                </div>
                <div className="date-of-working">
-                  <input type="date" className="date-of-working" id="date-of-working" placeholder="DATE" maxLength={35} value={dateOfWorking} onChange={(e) => setDateOfWorking(e.target.value)} />
+                  <input type="date" className="date-of-working" id="date-of-working" placeholder="DATE" maxLength={35} required value={dateOfWorking} onChange={(e) => setDateOfWorking(e.target.value)} />
                </div>
-               <button type="submit">SUBMIT</button>
+               <button type="submit" style={{ cursor: allFieldsCompleted ? "pointer" : "not-allowed" }}>
+                  SUBMIT
+               </button>
             </form>
          )}
 
